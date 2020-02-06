@@ -1,0 +1,36 @@
+.card-header .buttons {
+    position: absolute;
+    right: 15px;
+    display: none;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+}
+
+.card-header:hover .buttons {
+    display: block;
+}
+
+.actions-card {
+    padding: .35rem;
+}
+
+.actions-table td {
+    padding: .25rem;
+    vertical-align: middle;
+}
+
+.goal-done {
+    color: #009598;
+}
+
+.goal-date-ok {
+    color: #009598;
+}
+
+.goal-date-over {
+    color: #FF586b;
+}
+
+.goal-date-warn {
+    color: #FF8d60;
+}

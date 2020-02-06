@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-sm-10">
+        <div class="content-header">IDEAS</div>
+        <p class="content-sub-header">Here you can create, store, edit and convert ideas and thoughts into trackable goals.
+        </p>
+    </div>
+    <div class="content-header col-sm-2" style="text-align: right;">
+        <button type="button" class="btn btn-raised btn-outline-warning round btn-min-width mr-1 mb-1" data-toggle="modal" data-target="#newIdea" (click)="openModal('createEditIdeaModal', 'idea', 'create')">+
+            New
+            Idea</button>
+    </div>
+</div>
+
+<div class="email-application">
+    <div #contentOverlay class="content-overlay" (click)="onContentOverlay()"></div>
+    <div class="email-app-content row">
+        <div class="email-app-content-area w-100">
+            <div class="email-app-list-mails p-0" (click)="onListItemClick()">
+                <app-ideas-list [idea]="idea" [ideas]="ideas" [selectedIdeaId]="selectedIdeaId" (showIdea)="DisplayIdea($event)"></app-ideas-list>
+            </div>
+
+            <div class="email-app-mail-content" #ideaContent *ngIf="idea &&isIdeaSelected">
+                <app-idea-details [idea]="idea" (clickAllIdeas)="allIdeas()"></app-idea-details>
+            </div>
+        </div>
+    </div>
+</div>

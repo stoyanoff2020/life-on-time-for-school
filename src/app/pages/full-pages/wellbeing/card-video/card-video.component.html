@@ -1,0 +1,9 @@
+<!-- This is card for video content -->
+<div class="card">
+    <div class="card-content">
+        <div class="card-body">
+            <h4 *ngIf="post.title" class="card-title" [innerHtml]="post.title | safe: 'html'"></h4>
+            <div *ngIf="post.content" [innerHtml]="post.content | safe: 'html'"></div>
+        </div>
+    </div>
+</div>

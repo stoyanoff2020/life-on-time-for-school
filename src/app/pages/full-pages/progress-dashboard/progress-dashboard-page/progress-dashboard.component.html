@@ -1,0 +1,104 @@
+<!-- Minimal statistics start-->
+<section id="minimal-statistics">
+    <div class="row">
+        <div class="col-12 mb-1">
+            <div class="content-header">Your progress dashboard</div>
+            <p class="content-sub-header">This is summary of goals, actions and ideas added by you and your achievement rate.
+            </p>
+        </div>
+    </div>
+
+    <!-- Minimal statistics first row-->
+    <div class="row" matchHeight="card">
+        <div class="col-xl-3 col-lg-6 col-12" *ngFor="let stat of minStaticsDataFirstRow">
+            <app-min-statistic-card [stat]="stat">
+            </app-min-statistic-card>
+        </div>
+    </div>
+    <!-- Minimal statistics second row-->
+    <div class="row" matchHeight="card">
+        <div class="col-xl-3 col-lg-6 col-12" *ngFor="let stat of minStaticsDataSecondRow">
+            <app-min-statistic-card [stat]="stat"></app-min-statistic-card>
+        </div>
+    </div>
+</section>
+
+<section id="collapsible">
+    <div class="row">
+        <div class="col-12">
+            <div class="card ">
+                <div id="headingCollapse14" class="card-header pb-3">
+                    <a class="card-title lead collapsed text-primary" [attr.aria-expanded]="!isChartsCollapsed" aria-controls="charts" (click)="changeIsChartsCollapsed()">
+                        Click to expand and see charts
+                        <span class="float-right">
+                            <i *ngIf='isChartsCollapsed' class="fa fa-plus font-medium"></i>
+                            <i *ngIf='!isChartsCollapsed' class="fa fa-minus font-medium"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="card-content" id="charts" [ngbCollapse]="isChartsCollapsed">
+                    <div class="col-sm-12 mt-3 mb1">
+                        <div class="content-header">Latest Goals</div>
+                        <p class="content-sub-header">The last 3 goals added in application or those with nearest deadline.
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngIf="(donutCharts$ | async)?.length == 0">
+                            <div class="col-xl-4 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">You have no goals yet</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Donut chart start-->
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-12" *ngFor="let chart of donutCharts$ | async">
+                                <app-chart [chart]='chart'>
+                                </app-chart>
+                            </div>
+                        </div>
+                        <!--Donut chart end-->
+
+                        <!--Bar chart starts-->
+                        <div class="row text-left">
+                            <div class="col-sm-12">
+                                <app-bar-chart [chart]='barChart$ | async' [isCollapsed]="isChartsCollapsed">
+                                </app-bar-chart>
+                            </div>
+                        </div>
+                        <!--Bar chart ends-->
+                    </div>
+                </div>
+                <!-- </div> -->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row match-height">
+    <div class="col-xl-6 col-lg-12">
+        <!-- Calendar starts-->
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">My shedule</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body calendar">
+                    <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="calendarEvents" (eventRender)="eventRender($event)">
+                    </full-calendar>
+                </div>
+            </div>
+        </div>
+        <!-- Calendar ends-->
+    </div>
+    <!-- Blog`s posts start-->
+    <div class="col-xl-6 col-lg-12">
+        <app-blog-posts [posts]="blogPosts">
+        </app-blog-posts>
+    </div>
+    <!-- Blog`s posts end-->
+</div>

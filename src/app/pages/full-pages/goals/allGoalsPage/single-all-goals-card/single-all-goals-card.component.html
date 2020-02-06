@@ -1,0 +1,18 @@
+<ng-template [ngIf]="goal">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="goal{{goal.id}}" [ngClass]=" {'goal-done': goal.status === 'Active'}">{{goal.title}}
+            </h4>
+            <span class="small card-subtitle text-muted">From: &nbsp;
+        <span class="small" *ngIf='goal.created_at.day < 10'>0</span>{{goal.created_at.day}}/<span class="small" *ngIf='goal.created_at.month< 10'>0</span>{{goal.created_at.month}}/{{goal.created_at.year}}&nbsp; to:&nbsp;
+            <span *ngIf="goal.until_date" [ngClass]=" {'goal-date-ok': (goal.goalLeftDays < -3  || goal.status === 'Active'), 'goal-date-warn': (goal.goalLeftDays < 1 &&
+                    goal.goalLeftDays > -4 && goal.status === 'Inactive'), 'goal-date-over': (goal.goalLeftDays > 0 &&
+                    goal.status === 'Inactive')}">
+          <span class="small" *ngIf='goal.until_date.day < 10'>0</span>{{goal.until_date.day}}/
+            <span class="small" *ngIf='goal.until_date.month< 10'>0</span>{{goal.until_date.month}}/{{goal.until_date.year}}
+            </span>
+            </span>
+        </div>
+        <!-- <div class="card-content"> -->
+    </div>
+</ng-template>

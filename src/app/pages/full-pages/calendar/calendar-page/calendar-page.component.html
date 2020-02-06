@@ -1,0 +1,36 @@
+<section id="columns">
+    <div class="row">
+        <div class="col-sm-10 mt-3 mb-1">
+            <div class="content-header">CALENDAR</div>
+            <p class="content-sub-header">Here you can see your goals and tasks due date. You can click on date of your choice and create new goal too.</p>
+        </div>
+        <!-- <div class="content-header col-sm-2" style="text-align: right;">
+            <button type="button" class="btn btn-raised btn-outline-goal-set-new round btn-min-width mr-1 mb-1" target="popup" (click)="openModal(googleCalendarmodal)">
+                Sync to Google Calendar</button>
+        </div> -->
+        <div class="col-sm-2 mt-3 pt-3" style="text-align: right;">
+            <button type="button" class="btn btn-raised btn-outline-goal-set-new round btn-min-width mr-1 mb-1" target="popup" (click)="onClick()">
+                Google Sync</button>
+        </div>
+    </div>
+    <div class=" row ">
+        <div class="col ">
+            <!-- weekNumberCalculation='ISO' -->
+            <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins " [events]="events " (eventRender)="eventRender($event) " (dateClick)=" onDateClick($event) "></full-calendar>
+        </div>
+    </div>
+</section>
+
+<ng-template #googleCalendarmodal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Sync to Google Calendar</h4>
+        <button type="button" class="close" aria-describedby="modal-title" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- <iframe height="400" width="470" src="https://lifeontime.co.uk/app/sync/google-login.php"></iframe> -->
+        <iframe height="400" width="470" src="https://accounts.google.com/signin/oauth/oauthchooseaccount?client_id=116489093061-ujd6umebfdockh37mfh16j35h2orkdab.apps.googleusercontent.com&as=IhFGHUBttk8EepZqilR_ug&destination=https%3A%2F%2Flifeontime.co.uk&approval_state=!ChQ3Nk42ZEl5U1pDSXc3akUtMmExORIfZzJlM3lVWE5uY1lhOERFdWhZOThQY18xbVBpRzZCWQ%E2%88%99AJDr988AAAAAXdZsAbRk4ripTfnJg2w5RYDYwpFQkxWx&oauthriskyscope=1&xsrfsig=ChkAeAh8Tw9uZ41P8q-12uzJQE3B5ign6jr4Eg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow&target='top'"></iframe>
+
+    </div>
+</ng-template>

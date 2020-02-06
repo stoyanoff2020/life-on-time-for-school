@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'hindbold';
+    src: url('hind-bold-webfont.woff2') format('woff2'),
+         url('hind-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'hind_lightregular';
+    src: url('hind-light-webfont.woff2') format('woff2'),
+         url('hind-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'hind_mediumregular';
+    src: url('hind-medium-webfont.woff2') format('woff2'),
+         url('hind-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'hindregular';
+    src: url('hind-regular-webfont.woff2') format('woff2'),
+         url('hind-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'hind_semiboldregular';
+    src: url('hind-semibold-webfont.woff2') format('woff2'),
+         url('hind-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

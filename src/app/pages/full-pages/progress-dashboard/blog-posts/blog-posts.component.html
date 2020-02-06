@@ -1,0 +1,18 @@
+<!-- <div class="col-xl-6 col-lg-12"> -->
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Latest blog posts</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <div class="row match-height">
+                <ng-template [ngIf]="posts">
+                    <div class="col-sm-12 col-md-6" *ngFor="let post of posts">
+                        <app-single-post [post]="post"></app-single-post>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

@@ -1,0 +1,184 @@
+<section id="registration">
+    <div class="container-fluid">
+        <div class="row full-height-vh m-0">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="card-content">
+                        <div class="card-body p-0">
+                            <div class="row m-0">
+                                <div class="col-md-12 px-4 pt-3 pb-5 register-form">
+                                    <img class="register-logo" src="assets/img/logos/lot-generic-logo-w.png" alt="">
+                                    <h4 class="card-title mb-5 register-title">desktop application</h4>
+                                    <p class="card-text mb-3">
+                                        You are creating account for Life on Time {{appTypeInfo.name}} application.
+                                        This application comes with: {{appTypeInfo.description}}
+                                    </p>
+                                    <p class="card-text mb-3">
+                                        You'll be able to use the application for: {{appTypeInfo.duration}} days
+                                    </p>
+                                    <p class="card-text mb-3">
+                                        Price: £{{appTypeInfo.price}}
+                                    </p>
+                                    <div class="register-form-fields">
+                                    <form #registerForm="ngForm" (ngSubmit)="register()">
+                                        <input type="text" class="form-control mb-3" placeholder="Name" name="name" #name="ngModel" ngModel pattern="[A-Za-z ]{3,15}" required />
+                                        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+                                            <div *ngIf="name.errors.required">
+                                                Please input name!
+                                            </div>
+                                            <div *ngIf="name.errors.pattern">
+                                                Name should contains only letters and must be between 3 and 15 symbols long!
+                                            </div>
+                                        </div>
+                                        <input type="email" class="form-control mb-3" placeholder="Email" name="email" #email="ngModel" ngModel email required />
+                                        <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+                                            <div *ngIf="email.errors.required">
+                                                Email is required!
+                                            </div>
+                                            <div *ngIf="email.errors.email">
+                                                Insert valid email. example@example.exp
+                                            </div>
+                                        </div>
+                                        <input type="password" class="form-control mb-3" placeholder="Password" name="password" #password="ngModel" minlength="2" maxlength="15" required ngModel />
+                                        <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+                                            <div *ngIf="password.errors.required">
+                                                Please insert password!
+                                            </div>
+                                            <div *ngIf="password.errors.minlength || password.errors.maxlength">
+                                                Password must be between 2 and 15 symbols long!
+                                            </div>
+
+                                        </div>
+
+                                        <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmPassword" #confirmPassword="ngModel" ngModel appConfirmEqualValidator="password" required />
+                                        <div class="alert alert-danger" *ngIf="confirmPassword.invalid
+                                         && confirmPassword.touched ">
+                                            <div *ngIf="confirmPassword.errors.required">
+                                                Please confirm your password!
+                                            </div>
+                                            <div *ngIf="confirmPassword.errors.notEqual && !confirmPassword.errors?.required">
+                                                Passwords do not match!
+                                            </div>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox custom-control-inline mb-3">
+                                            <input type="checkbox" id="acceptTerms" name="acceptTerms" class="custom-control-input" #acceptTerms="ngModel" ngModel required />
+                                            <label class="custom-control-label" for="acceptTerms">
+                                                I accept the terms & conditions.
+                                            </label>
+                                        </div>
+                                        <div class="alert alert-danger" *ngIf="acceptTerms.invalid && acceptTerms.touched && !name.invalid && !email.invalid && !password.invalid && !confirmPassword.invalid && acceptTerms.errors.required">
+                                            You must accept the terms and conditions to successfully sign up.
+                                        </div>
+                                        <button class="btn" type="submit" [disabled]="registerForm.invalid">
+                                            Register
+                                        </button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+<!--Old html Registration Page Starts-->
+<!-- <section id="registration">
+    <div class="container-fluid">
+        <div class="row full-height-vh m-0">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body register-img">
+                            <div class="row m-0">
+                                <div class="col-lg-6 d-none d-lg-block py-2 px-3 text-center">
+                                    <img src="assets/img//ico/android-chrome-512x512.png" alt="" class="img-fluid mt-3 pl-3" width="400" height="230" />
+                                </div>
+                                <div class="col-lg-6 col-md-12 pt-3 px-4 bg-white">
+                                    <h4 class="card-title mb-2">Create Account</h4>
+                                    <p class="card-text mb-3">
+                                        Fill the below form to create a new account.
+                                    </p>
+                                    <form #registerForm="ngForm" (ngSubmit)="register()">
+                                        <input type="text" class="form-control mb-3" placeholder="Name" name="name" #name="ngModel" ngModel pattern="[A-Za-z ]{3,15}" required />
+                                        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+                                            <div *ngIf="name.errors.required">
+                                                Please input name!
+                                            </div>
+                                            <div *ngIf="name.errors.pattern">
+                                                Name should contains only letters and must be between 3 and 15 symbols long!
+                                            </div>
+                                        </div>
+                                        <input type="email" class="form-control mb-3" placeholder="Email" name="email" #email="ngModel" ngModel email required />
+                                        <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+                                            <div *ngIf="email.errors.required">
+                                                Email is required!
+                                            </div>
+                                            <div *ngIf="email.errors.email">
+                                                Insert valid email. example@example.exp
+                                            </div>
+                                        </div>
+                                        <input type="password" class="form-control mb-3" placeholder="Password" name="password" #password="ngModel" minlength="2" maxlength="15" required ngModel />
+                                        <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+                                            <div *ngIf="password.errors.required">
+                                                Please insert password!
+                                            </div>
+                                            <div *ngIf="password.errors.minlength || password.errors.maxlength">
+                                                Password must be between 2 and 15 symbols long!
+                                            </div>
+
+                                        </div>
+
+                                        <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmPassword" #confirmPassword="ngModel" ngModel appConfirmEqualValidator="password" required />
+                                        <div class="alert alert-danger" *ngIf="confirmPassword.invalid
+                                         && confirmPassword.touched ">
+                                            <div *ngIf="confirmPassword.errors.required">
+                                                Please confirm your password!
+                                            </div>
+                                            <div *ngIf="confirmPassword.errors.notEqual && !confirmPassword.errors?.required">
+                                                Passwords do not match!
+                                            </div>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox custom-control-inline mb-3">
+                                            <input type="checkbox" id="acceptTerms" name="acceptTerms" class="custom-control-input" ngModel />
+                                            <label class="custom-control-label" for="acceptTerms">
+                                                I accept the terms & conditions.
+                                            </label>
+                                        </div>
+                                        <div class="fg-actions d-flex justify-content-between">
+                                            <div class="login-btn">
+                                                <button class="btn btn-outline-primary">
+                                                    <a class="text-decoration-none" [routerLink]="['/user/login']">
+                                                        Back To Login
+                                                    </a>
+                                                </button>
+                                            </div>
+                                            <div class="recover-pass">
+                                                <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">
+                                                     <a class="text-decoration-none text-white">
+                                                        Register
+                                                    </a>
+Register
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section> -->
+<!--Registration Page Ends-->

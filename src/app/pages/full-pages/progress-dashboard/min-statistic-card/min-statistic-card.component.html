@@ -1,0 +1,18 @@
+<ng-template [ngIf]="stat">
+    <div class="card" [ngClass]="stat.class">
+        <div class="card-content">
+            <div class="px-3 py-3">
+                <div class="media">
+                    <div class="media-body text-left" [ngClass]=" stat.textClass ">
+                        <h3 [ngClass]="stat.valueClass">{{stat.value}}</h3>
+                        <span>{{stat.text}}
+                            <span *ngIf="dateArray.indexOf(stat.title) !== -1">{{stat.registrationDate}}</span></span>
+                    </div>
+                    <div class="media-right align-self-center">
+                        <i class="font-large-2 float-right" [ngClass]="stat.iconClass"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,11 @@
+.modal-header {
+    background-color: #009DA0
+}
+
+button.close {
+    border: 0;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

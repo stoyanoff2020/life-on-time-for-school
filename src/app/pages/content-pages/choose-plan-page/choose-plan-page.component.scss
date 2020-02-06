@@ -1,0 +1,70 @@
+// Choose Plan Page
+#choose-plan {
+    background-image: url('assets/img/photos/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    .register-logo {
+        width: 280px;
+    }
+    .img {
+        vertical-align: middle;
+        border-style: none;
+    }
+    .register-form {
+        background-color: rgba(0, 0, 0, .4);
+        width: 800px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+    .register-title {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .register-form .btn {
+        display: block;
+        background: #FF6B64;
+        color: #fff;
+        padding: 10px;
+    }
+    .app-type-register {
+        position: relative;
+        padding: 15px;
+        color: #000;
+    }
+    .app-type-register img {
+        height: 100px;
+    }
+    .app-descr {
+        position: absolute;
+        background-color: #fff;
+        top: 0;
+        z-index: 1;
+        margin-left: -15px;
+        padding: 15px;
+        display: none;
+        transition: all 0.3s ease-out;
+    }
+    .app-type-register:hover .app-descr {
+        display: block;
+        height: 200%;
+        width: 100%;
+    }
+    .app-type-register.disabled {
+        pointer-events: none;
+        opacity: 0.2;
+    }
+    @media screen and (max-width: 600px) {
+        .register-logo {
+            width: 180px;
+        }
+        .register-form{
+            width: 440px;
+        }
+        .app-type-register img{
+            height: 120px;
+        }
+      }
+}

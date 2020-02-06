@@ -1,0 +1,55 @@
+// For Registration page
+#registration {
+    background-image: url("assets/img/photos/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    .register-img {
+        background: #f0f0f0;
+        padding: 0;
+    }
+    // .recover-pass {
+    //     button.btn.btn-primary {
+    //         color: #fff !important;
+    //     }
+    // }
+    .register-logo {
+        width: 280px;
+    }
+    .register-form {
+        background-color: rgba(0, 0, 0, .4);
+        width: 800px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+    @media screen and (max-width: 600px) {
+        .register-form-fields{
+            margin: 0 auto;
+        }
+        .register-logo {
+            width: 180px;
+        }
+        .register-form{
+            width: 400px;
+        }
+    }
+    .register-title {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .register-form .btn {
+        display: block;
+        background: #FF6B64;
+        color: #fff;
+        padding: 10px;
+        width: 100%;
+    }
+    .register-form .btn:disabled {
+        cursor: not-allowed;
+    }
+    .register-form .btn:hover:not([disabled]) {
+        color: #fff;
+        background-color: rgb(49, 113, 143);
+    }
+}

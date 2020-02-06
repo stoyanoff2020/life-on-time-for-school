@@ -1,0 +1,50 @@
+<ng-template [ngIf]="currentGoalCategory">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="content-header">GOALS | {{currentGoalCategory.title}}</div>
+            <p class="content-sub-header">You can check your current goals and set new ones.</p>
+        </div>
+        <div class="content-header col-sm-2" style="text-align: right;">
+            <button type="button" class="btn btn-raised btn-outline-goal-set-new round btn-min-width mr-1 mb-1" data-toggle="modal" data-target="#goal" (click)="openModal('createEditModal', 'goal', 'create')">+
+                Set New
+                Goal</button>
+        </div>
+    </div>
+
+
+    <ng-template ngFor [ngForOf]="(goals$ | async)?.upcommingGoals" let-goals="ngForOf" let-i="index " let-l="count">
+        <div class="row match-height " *ngIf="(i)%3===0 || i === 0">
+            <div class="col-sm-12 col-md-4" *ngIf="i+0 < l">
+                <app-single-goal-card [goal]="goals[i+0]">
+                </app-single-goal-card>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+1< l">
+                <app-single-goal-card [goal]="goals[i+1]  "></app-single-goal-card>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+2< l">
+                <app-single-goal-card [goal]="goals[i+2]  "></app-single-goal-card>
+            </div>
+        </div>
+    </ng-template>
+    <hr>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="content-header">Completed GOALS | {{currentGoalCategory.title}}</div>
+        </div>
+    </div>
+
+    <ng-template ngFor [ngForOf]="(goals$ | async)?.completedGoals" let-goals="ngForOf" let-i="index " let-l="count">
+        <div class="row match-height " *ngIf="(i)%3===0 || i === 0">
+            <div class="col-sm-12 col-md-4" *ngIf="i+0 < l">
+                <app-single-goal-card [goal]="goals[i+0]">
+                </app-single-goal-card>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+1< l">
+                <app-single-goal-card [goal]="goals[i+1]  "></app-single-goal-card>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+2< l">
+                <app-single-goal-card [goal]="goals[i+2]  "></app-single-goal-card>
+            </div>
+        </div>
+    </ng-template>
+</ng-template>

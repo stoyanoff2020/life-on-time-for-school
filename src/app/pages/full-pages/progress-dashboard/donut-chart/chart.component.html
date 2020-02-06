@@ -1,0 +1,51 @@
+<ng-template [ngIf]="chart">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">{{chart.goal}}</h4>
+        </div>
+        <div class="card-content">
+            <p class="font-medium-2 text-muted text-center">Goal Actions</p>
+            <div id="donut-dashboard-chart" class="height-250 donut">
+                <x-chartist class="" [data]="donutChart.data" [type]="donutChart.type" [options]="donutChart.options" [responsiveOptions]="donutChart.responsiveOptions" [events]="donutChart.events">
+
+                </x-chartist>
+            </div>
+
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col">
+                        <span class="mb-1 text-muted d-block">{{chart.series[0].name}} - {{overdueValue}}</span>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="overdueValue/setValue*100" [attr.aria-valuenow]="chart.series[0].value" aria-valuemin="0" aria-valuemax="20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span class="mb-1 text-muted d-block">{{chart.series[1].name}} - {{upcomingValue}}</span>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" [style.width.%]="upcomingValue/setValue*100" [attr.aria-valuenow]="chart.series[1].value" aria-valuemin="0" aria-valuemax="20">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <span class="mb-1 text-muted d-block">{{chart.series[2].name}} - {{setValue}}</span>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-deep-purple bg-lighten-1" role="progressbar" [style.width.%]="setValue/setValue*100" [attr.aria-valuenow]="
+                                  chart.series[2].value" aria-valuemin="0" aria-valuemax="20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span class="mb-1 text-muted d-block">{{chart.series[3].name}} - {{doneValue}}</span>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-success" role="progressbar" [style.width.%]="doneValue/setValue*100" [attr.aria-valuenow]="chart.series[3].value" aria-valuemin="0" aria-valuemax="20">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

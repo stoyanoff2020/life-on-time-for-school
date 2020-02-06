@@ -1,0 +1,22 @@
+<div [perfectScrollbar] class="email-app-list">
+    <div id="users-list">
+        <div class="list-group">
+            <div class="users-list-padding" *ngIf='ideas'>
+                <a [ngClass]="idea.id==selectedIdeaId ?'list-group-item list-group-item-action bg-blue-grey bg-lighten-5 border-right-primary border-right-2': 'list-group-item list-group-item-action no-border'" *ngFor="let idea of ideas" (click)="onIdea($event, idea)">
+                    <span class="media">
+
+            <div class="media-body text-left">
+              <p class="list-group-item-heading text-bold-500 ">
+                {{ idea.name}}
+                <span class="float-right">
+                  <span class="font-small-2 primary">{{
+                            idea.created_at}}</span>
+                    </span>
+                    </p>
+            </div>
+            </span>
+            </a>
+            <p class="primary text-center" *ngIf="ideas.length===0">There are no ideas!</p>
+        </div>
+    </div>
+</div>

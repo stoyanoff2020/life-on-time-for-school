@@ -1,0 +1,35 @@
+.modal-header {
+    background-color: #009DA0
+}
+
+// .results {
+//     padding: 3px;
+//     display: inline-block;
+//     height: 10vh;
+//     min-width: 40vw;
+//     border-style: solid;
+//     border-width: 1px;
+//     border-radius: 3px;
+//     border-color: grey;
+//     font-weight: bold;
+// }
+// .final {
+//     color: black;
+//     font-weight: normal;
+// }
+// .interim {
+//     color: darkgrey;
+// }
+.dropzone.dz-clickable {
+    cursor: pointer;
+}
+
+.dropzone {
+    min-height: 350px;
+    border: 2px dashed #009DA0;
+    background: #f5f7fa;
+}
+
+button.close {
+    border: 0;
+}

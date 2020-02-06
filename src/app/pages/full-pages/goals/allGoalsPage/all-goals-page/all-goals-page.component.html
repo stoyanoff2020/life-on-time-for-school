@@ -1,0 +1,29 @@
+<section #allGoals>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="content-header">GOALS | All</div>
+            <p class="content-sub-header">Here you can see all your goals.</p>
+        </div>
+        <div class="content-header col-sm-2" style="text-align: right;">
+            <button type="button" class="btn btn-raised btn-outline-goal-set-new round btn-min-width mr-1 mb-1" data-toggle="modal" data-target="#goal" (click)="downloadAsPDF()">
+                Download as PDF</button>
+        </div>
+    </div>
+
+    <ng-template ngFor [ngForOf]="goals$ | async" let-goals="ngForOf" let-i="index " let-l=count>
+        <div class="row match-height " *ngIf="(i)%4===0 || i === 0">
+            <div class="col-sm-12 col-md-4" *ngIf="i+0 < l">
+                <app-single-all-goals-card [goal]="goals[i+0]">
+                </app-single-all-goals-card>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+1< l">
+                <app-single-all-goals-card [goal]="goals[i+1]  ">
+                </app-single-all-goals-card>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+2< l">
+                <app-single-all-goals-card [goal]="goals[i+2]  ">
+                </app-single-all-goals-card>
+            </div>
+        </div>
+    </ng-template>
+</section>

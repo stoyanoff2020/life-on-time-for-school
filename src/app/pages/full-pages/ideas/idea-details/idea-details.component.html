@@ -1,0 +1,34 @@
+<!-- <div class="email-app-mail-content" #ideaContent *ngIf="idea && isIdeaSelected"> -->
+<div class="email-app-mail-content-detail">
+    <div class="email-app-options card-body">
+        <div class="row d-md-none">
+            <button class="btn btn-raised btn-primary ml-2 back-to-inbox" (click)="onAllIdeas()">
+                <i class="fa fa-angle-left"></i> All Ideas</button>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-12 text-right">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-raised btn-outline-success mr-1" data-toggle="modal" data-target="#goal" alt="Convert Idea into Goal" title="Convert Idea into Goal" (click)="openModal('createEditModal', 'goal', 'create', idea)"><i
+                            class="ft-refresh-cw font-medium"></i></button>
+                    <button type="button" class="btn btn-raised btn-outline-primary mr-1" data-toggle="modal" data-target="#goal" alt="Edit Idea" title="Edit Idea" (click)="openModal('createEditIdeaModal', 'idea', 'edit', idea)"><i
+                            class="ft-edit-2 font-medium"></i></button>
+                    <button type="button" class="btn btn-raised btn-outline-danger mr-1" alt="Delete Idea" title="Delete Idea" (click)="openModal('confirmModal', 'idea', 'delete', idea)"><i
+                            class="ft-x font-medium"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="email-app-title card-body">
+        <h3 class="list-group-item-heading">{{idea.name}}</h3>
+        <p *ngIf="idea.info?.content">{{idea.info.content}}</p>
+    </div>
+
+    <div class="media-list">
+        <!-- Images -->
+        <app-idea-files [files]="idea.info.images" [isImages]='true' fileType="images" [fileStartUrl]="fileStartUrl" [userId]="userId" [ideaId]="idea.id"></app-idea-files>
+        <!-- Files -->
+        <app-idea-files [files]="idea.info.files" [isImages]='false' fileType="files" [fileStartUrl]="fileStartUrl" [userId]="userId" [ideaId]="idea.id"></app-idea-files>
+    </div>
+</div>
+<!-- </div> -->

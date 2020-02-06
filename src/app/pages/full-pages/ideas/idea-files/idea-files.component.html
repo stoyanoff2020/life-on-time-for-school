@@ -1,0 +1,48 @@
+<div id="filesCollapse" class="card-header p-0">
+    <a class="collapsed email-app-sender list-group-item list-group-item-action border-0" [attr.aria-expanded]="!isIdeaFilesCollapsed" [attr.aria-controls]="fileType" (click)="isIdeaFilesCollapsed=!isIdeaFilesCollapsed">
+
+        <div class="media">
+            <div class="media-body">
+                <h6 class="list-group-item-heading text-bold-500">Idea {{fileType | titlecase}}
+                    <span class="float-right">
+                        <i class="ft-chevron-down font-medium"></i>
+                    </span>
+                </h6>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div [id]="fileType" [ngbCollapse]="isIdeaFilesCollapsed">
+    <div class="card-content">
+        <button type="button" class="btn btn-raised btn-outline-primary mr-1" data-toggle="modal" data-target="#upload" [title]="'Upload' + fileType | titlecase"><i class="ft-upload font-medium"
+                (click)="openModal('uploadModal', fileType, 'upload', userId )"></i></button>
+        <div class="email-app-text card-body">
+            <div class="email-app-message" *ngIf="!isIdeaFilesCollapsed">
+                <ng-template [ngIf]="isImages" [ngIfElse]="filesTemplate">
+                    <figure *ngFor="let file of files" class="col-md-4">
+                        <a [href]="fileStartUrl+'/'+file.path | safe: 'url'" data-size="1600x1067" target="_blank">
+                            <img alt="picture" [src]="fileStartUrl+'/'+file.path  | safe: 'url'" class="img-fluid img-thumbnail">
+                        </a>
+                        <a class=" btn btn-sm btn-raised btn-outline-primary round btn-min-width ml-1 mb-1" (click)="openModal('confirmModal', fileType.slice(0,-1), 'delete', file)">Delete</a>
+                    </figure>
+                </ng-template>
+                <ng-template #filesTemplate>
+                    <div *ngFor="let file of files">
+                        <i class="fa" [ngClass]="{'fa-file-pdf-o' : file.path.endsWith('.pdf'), 'fa-file-word-o': (file.path.endsWith('.doc') || file.path.endsWith('.docx')),
+                                'fa-file-alt': file.path.endsWith('.rtf') ,'fa-file-excel-o':
+                                (file.path.endsWith('.xls') ||
+                                file.path.endsWith('.xlsx')), 'fa-file-powerpoint-o' : (file.path.endsWith('.ppt') ||
+                                file.path.endsWith('.pptx')), 'fa-file-zip-o' : file.path.endsWith('.zip'), 'fas
+                                fa-archive': file.path.endsWith('.rar')}" style="font-size:24px"></i>
+                        <span><a *ngIf="file" [href]="fileStartUrl+'/'+file.path  | safe: 'url'"
+                                target="_blank">{{file.name}}</a></span>
+                        <span><a class=" btn btn-sm btn-raised btn-outline-primary round btn-min-width ml-1 mb-1 "
+                                (click)="openModal('confirmModal', fileType.slice(0,-1), 'delete',
+                                file)">Delete</a></span>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

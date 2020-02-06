@@ -1,0 +1,35 @@
+@import "../../../../../assets/sass/scss/gradient-variables.scss";
+:host /deep/ .ct-area {
+    stroke: none;
+    fill-opacity: 0.1;
+}
+
+:host /deep/ .ct-grid {
+    stroke-dasharray: 0px;
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+:host /deep/ .ct-label {
+    font-size: 0.9rem;
+}
+
+//Bar Chart CSS Starts
+// :host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+1) {
+//     stroke: url($bar-chart-gradient-path +  #gradient7);
+// }
+// :host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+2) {
+//     stroke: url($bar-chart-gradient-path +  #gradient5);
+// }
+// :host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+3) {
+//     stroke: url($bar-chart-gradient-path +  #gradient6);
+// }
+// :host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+4) {
+//     stroke: url($bar-chart-gradient-path +  #gradient4);
+// }
+// :host /deep/ .BarChartShadow {
+//     -webkit-filter: drop-shadow(0px 20px 8px rgba(0, 0, 0, 0.3));
+//     filter: drop-shadow(0px 20px 8px rgba(0, 0, 0, 0.3));
+//     /* Same syntax as box-shadow, except
+//                                                        for the spread property */
+// }
+// Bar Chart CSS Ends

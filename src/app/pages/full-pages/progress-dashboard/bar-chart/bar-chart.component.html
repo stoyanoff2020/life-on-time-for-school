@@ -1,0 +1,24 @@
+<!--Bar Chart Starts-->
+<!-- <div class="row text-left">
+    <div class="col-sm-12"> -->
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Goals and Actions by Category</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <div id="bar-chart" class="height-400">
+                <ng-template [ngIf]="chart">
+                    <x-chartist [data]="barChart.data" [type]="barChart.type" [options]="barChart.options" [responsiveOptions]="barChart.responsiveOptions" [events]="barChart.events">
+                    </x-chartist>
+                </ng-template>
+            </div>
+            <p style="color: #009DA0">Goals</p>
+            <p style="color: #FF8D60">Actions</p>
+        </div>
+    </div>
+</div>
+<!-- </div>
+</div> -->
+<!--Bar Chart Ends-->

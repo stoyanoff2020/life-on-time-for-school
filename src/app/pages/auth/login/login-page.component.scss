@@ -1,0 +1,101 @@
+// Login Page
+// #login {
+//     background-image: url("assets/img/photos/background.png");
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     .login-img {
+//         padding: 0;
+//         background: #f0f0f0;
+//     }
+//     button:disabled {
+//         cursor: not-allowed;
+//     }
+//     .login-btn {
+//         .btn.btn-outline-primary {
+//             &:hover {
+//                 a {
+//                     color: #fff;
+//                 }
+//             }
+//         }
+//     }
+//     .recover-pass {
+//         button.btn.btn-primary {
+//             color: #fff !important;
+//         }
+//     }
+//     .forgot-password-option,
+//     .remember-me {
+//         a.text-decoration-none,
+//         .custom-control-label {
+//             font-size: 14px;
+//         }
+//     }
+// }
+// For new login page
+#login {
+    background-image: url("assets/img/photos/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    .login-img {
+        background: #f0f0f0;
+        padding: 0;
+    }
+    // .recover-pass {
+    //     button.btn.btn-primary {
+    //         color: #fff !important;
+    //     }
+    // }
+    .login-logo {
+        width: 280px;
+    }
+    .login-form {
+        background-color: rgba(0, 0, 0, .4);
+        width: 800px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+    .login-title {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .login-form .btn {
+        display: block;
+        background: #FF6B64;
+        color: #fff;
+        padding: 10px;
+        width: 100%;
+    }
+    .login-form .btn-outlined {
+        display: block;
+        background: transparent;
+        border: 0;
+        color: #fff;
+        text-decoration: underline;
+        padding: 10px;
+        width: 100%;
+    }
+    .login-form .btn:disabled {
+        cursor: not-allowed;
+    }
+    .login-form .btn:hover:not([disabled]) {
+        color: #fff;
+        background-color: rgb(49, 113, 143);
+    }
+    .login-btn {
+        margin-top: 15px;
+    }
+    @media screen and (max-width: 600px) {
+        .login-form-fields {
+            margin: 0 auto;
+        }
+        .login-logo {
+            width: 180px;
+        }
+        .login-form {
+            width: 400px;
+        }
+    }
+}

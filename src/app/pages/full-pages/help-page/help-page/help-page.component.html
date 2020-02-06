@@ -1,0 +1,24 @@
+<section id="columns">
+    <div class="row">
+        <div class="col-12 mt-3 mb-1">
+            <div class="content-header">HELP</div>
+            <p class="content-sub-header">You will find really good and helpful resources in this section.</p>
+        </div>
+    </div>
+    <ng-template ngFor [ngForOf]="posts" let-post let-i="index " let-l=count>
+        <div class="row" *ngIf="(i)%3===0 || i === 0">
+            <div class="col-sm-12 col-md-4" *ngIf="i+0 < l">
+                <app-card-text [post]="posts[i+0]">
+                </app-card-text>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+1< l">
+                <app-card-text [post]="posts[i+1]">
+                </app-card-text>
+            </div>
+            <div class="col-sm-12 col-md-4" *ngIf="i+2< l">
+                <app-card-text [post]="posts[i+2]">
+                </app-card-text>
+            </div>
+        </div>
+    </ng-template>
+</section>

@@ -1,0 +1,9 @@
+<!-- This is card for audio content -->
+<div class="card">
+    <div class="card-content">
+        <div class="card-body">
+            <h4 class="card-title" *ngIf="post.title" [innerHtml]="post.title | safe: 'html'"></h4>
+            <p class="card-text" *ngIf="post.content" [innerHtml]="post.content | safe: 'html'"></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<ng-template [ngIf]="goal">
+    <div class="card" [id]="'g-'+ goal.id">
+        <div class="card-header">
+            {{isGoalTasksCompleted}}
+            <div class="buttons">
+                <button type="button" class="btn btn-raised btn-outline-success mr-1" data-toggle="modal" data-target="#goal" [attr.title]="isAllGoalTasksCompleted ? 'Complete Goal' : null" ngbPopover="If you want to complete the goal, you need to complete all goal's tasks first!"
+                    [triggers]="!isAllGoalTasksCompleted ? 'mouseenter:mouseleave' : 'manual'" container="body" popoverTitle="Complete goal's tasks firts!" (click)="isAllGoalTasksCompleted ?
+                    changeStatus('goal', goal.id, goal.status):null"><i class="ft-check font-medium-3"></i></button>
+                <button type="button" class="btn btn-raised btn-outline-goal-edit mr-1" data-toggle="modal" data-target="#goal" alt="Edit Goal" title="Edit Goal" (click)="openModal('createEditModal', 'goal', 'edit', goal)"><i
+                        class="ft-edit-2 font-medium-3"></i></button>
+                <button type="button" class="btn btn-raised btn-outline-goal-delete mr-1" alt="Delete Goal" title="Delete Goal" (click)="openModal('confirmModal', 'goal', 'delete', goal)"><i
+                        class="ft-x font-medium-3"></i></button>
+            </div>
+            <h4 class="card-title" [ngClass]=" {'goal-done': goal.status === 1}">{{goal.title}}
+            </h4>
+            <span class="small card-subtitle text-muted">From: &nbsp;
+                <span class="small" *ngIf='goal.created_at.day < 10'>0</span>{{goal.created_at.day}}/<span class="small" *ngIf='goal.created_at.month< 10'>0</span>{{goal.created_at.month}}/{{goal.created_at.year}}&nbsp; to:&nbsp;
+            <span *ngIf="goal.until_date" [ngClass]=" {'goal-date-ok': (goal.goalLeftDays < -3  || goal.status === 1), 'goal-date-warn': (goal.goalLeftDays < 1 &&
+                    goal.goalLeftDays > -4 && goal.status === 0), 'goal-date-over': (goal.goalLeftDays > 0 &&
+                    goal.status === 0)}">
+                    <span class="small" *ngIf='goal.until_date.day < 10'>0</span>{{goal.until_date.day}}/
+            <span class="small" *ngIf='goal.until_date.month< 10'>0</span>{{goal.until_date.month}}/{{goal.until_date.year}}
+            </span>
+            </span>
+            <p class="card-subtitle text-muted">{{goal.description}}</p>
+        </div>
+        <div class="card-content">
+
+            <div class="col-sm-12 text-right text-primary">
+                <a *ngIf="goal.idea_id != null" class="btn btn-sm btn-raised btn-outline-primary round btn-min-width ml-1 mb-1" (click)=goToIdea(goal.idea_id)>
+                    Go to idea
+                </a>
+            </div>
+
+            <div class="card-body table-responsive actions-card">
+                <table class="table text-left actions-table">
+                    <thead>
+                        <tr>
+                            <th>Actions list</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <app-single-action *ngFor="let task of goal.tasks" [task]="task" [goalUntilDate]="goal.until_date" [isGoalExpired]="isGoalExpired">
+                        </app-single-action>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-sm-12 col-lg-6"></div>
+                <div class="col-sm-12 col-lg-6 text-right text-primary"><a class="btn btn-sm btn-raised btn-outline-primary round btn-min-width ml-1 mb-1" data-toggle="modal" data-target="#action" ngbPopover="If you want to create new task, you need to update goal due date first!" [triggers]="isGoalExpired ? 'mouseenter:mouseleave' : 'manual'"
+                        container="body" popoverTitle="Change goal due date first!" (click)="!isGoalExpired ?
+                         openModal('createEditModal', 'action', 'create', goal.id, goal.until_date) : null">+
+                        New
+                        Action</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
