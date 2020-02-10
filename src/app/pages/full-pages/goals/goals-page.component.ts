@@ -14,12 +14,12 @@ import { TaskService } from 'app/shared/services/task.service';
 import { UserService } from 'app/shared/services/user.service';
 import { ModalService } from "app/shared/services/modal.service";
 import { EventService } from 'app/shared/services/event.service';
+import { PostService } from 'app/shared/services/post.service';
 
 import { convertDateToString } from "app/shared/utilities";
-import { ViewportScroller } from '@angular/common';
+//import { ViewportScroller } from '@angular/common';
 
 import { DOCUMENT } from '@angular/common';
-import { filter } from 'rxjs/operators';
 import { GlobalService } from 'app/shared/services/global.service';
 
 
@@ -34,8 +34,10 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   currentGoalCategory: Category;
   goalCategories: Array<Category>;
-  private path: string;
   goals$;
+  articles$;
+  private path: string;
+  private currentUserClass: string;
   private goalCategoriesSubscription: Subscription;
   private deleteSubscription: Subscription;
   private createGoalSubscription: Subscription;
@@ -57,8 +59,9 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private eventService: EventService,
     private userService: UserService,
     private globalService: GlobalService,
+    private postService: PostService,
     private router: Router,
-    private vps: ViewportScroller,
+    //private vps: ViewportScroller,
     @Inject( DOCUMENT ) private document: Document
   ) {
 
@@ -72,9 +75,11 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.path = data[ 0 ].path;
 
       this.goalCategoriesSubscription = this.userService.getUserAvailableCategoriesObj()
-        .subscribe( categories => {
-          this.globalService.setAppCategories( categories );
-          this.goalCategories = categories;
+        .subscribe( ( studentInfo ) => {
+          console.log( studentInfo.categories );
+          this.globalService.setAppCategories( studentInfo.categories );
+          this.currentUserClass = studentInfo.class;
+          this.goalCategories = studentInfo.categories;
           this.currentGoalCategory = this.goalCategories
             .find( category => category.pathEnd === this.path );
           if ( !this.currentGoalCategory ) {
@@ -211,29 +216,6 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
           const action = data[ 'data' ];
           const goalId = action.goal_id;
           this.autoChangeGoalStatusDependingTasksStatus( goalId );
-          // this.goalTasksCompletedSubs = this.goalService.getGoalInfoForStatus( goalId )
-          //   .subscribe( goalInfo => {
-          //     //Autocomplete Goal, when all tasks are completed
-          //     if ( goalInfo.isTasksCompleted === true ) {
-          //       if ( goalInfo.status == '0' ) {
-          //         const item = {
-          //           id: goalId,
-          //           status: 1
-          //         }
-          //         this.changeGoalStatus( goalId, item )
-          //       }
-          //     } else {
-          //       //Autouncomplete Goal, when not all tasks are completed
-          //       if ( goalInfo.status == '1' ) {
-          //         const item = {
-          //           id: goalId,
-          //           status: 0
-          //         }
-          //         this.changeGoalStatus( goalId, item )
-          //       }
-          //     }
-          //     this.loadPageGoals();
-          //   } )
         } );
     }
   }
@@ -273,6 +255,7 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private loadPageGoals() {
     this.goals$ = this.goalService.getGoalsByCategory( this.currentGoalCategory.title );
+    this.articles$ = this.postService.getArticlesByCategoryIdAndUserClassId( this.currentGoalCategory.id, this.currentUserClass );
     // const tree = this.router.parseUrl( this.router.url );
     // const element = document.querySelector( "#" + tree.fragment );
     // console.log( tree ); {

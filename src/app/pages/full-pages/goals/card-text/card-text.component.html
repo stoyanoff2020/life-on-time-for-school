@@ -1,0 +1,24 @@
+<!-- Card for normal content -->
+<div class="card-content">
+    <img class="card-img-top img-fluid" [src]="post.imageUrl? (post.imageUrl | safe: 'url') :   './assets/img/photos/06.jpg'" alt="Card image cap">
+    <div class="card-body">
+        <h4 class="card-title" *ngIf="post.title" [innerHtml]="post.title | safe: 'html'"></h4>
+        <p class="card-text" *ngIf="post.shortContent" [innerHtml]="(post.shortContent | safe: 'html')">...</p>
+        <a class="btn btn-outline-warning" data-toggle="modal" data-target="#articleContent" (click)=" open(articleContent)">Read
+            full article</a>
+    </div>
+</div>
+
+<ng-template #articleContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="contentModal" [innerHtml]="post.title | safe: 'html'"></h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <img class="card-img-top img-fluid" [src]="post.imageUrl? (post.imageUrl | safe: 'url' ):   './assets/img/photos/06.jpg'" alt="Card image cap">
+        <p class="card-text" *ngIf="post.content" [innerHtml]="post.content | safe: 'html'"></p>
+        <!-- <iframe [src]="post.link? (post.link | safe: 'resourceUrl'): ''"></iframe> -->
+    </div>
+</ng-template>

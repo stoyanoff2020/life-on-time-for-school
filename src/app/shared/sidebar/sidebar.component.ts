@@ -42,11 +42,11 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     const goalsMenu = ROUTES.find( m => m.title === 'Values' );
 
     this.availableCategoriesSubscription = this.userService.getUserAvailableCategoriesObj()
-      .subscribe( categories => {
+      .subscribe( studentInfo => {
         //this.userService.setCategoriesWindow( data );
-        this.globalService.setAppCategories( categories );
+        this.globalService.setAppCategories( studentInfo.categories );
         goalsMenu[ 'submenu' ] = [];
-        categories.forEach( category => {
+        studentInfo.categories.forEach( category => {
           goalsMenu[ 'submenu' ].push(
             {
               path: `/values/${category.pathEnd}`,

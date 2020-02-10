@@ -15,6 +15,7 @@ export class SingleGoalCardComponent implements OnInit {
   @Input() goal: Goal;
   isGoalExpired;
   isAllGoalTasksCompleted: boolean;
+  isGoalCollapsed: boolean = true;
 
   constructor (
     private modalService: ModalService,

@@ -8,13 +8,19 @@ import { environment } from "environments/environment";
 import { WellbeingInfo } from '../../shared/models/wellbeingInfo';
 
 //'https://lotweb.cweb.bg/wp-json/wp/v2/'
-const BASE_URL = environment.wp_url;
-const WP_API_URL = BASE_URL + 'wp-json/wp/v2/';
+// const BASE_URL = environment.wp_url;
+const BASE_URL = environment.apiUrl;
+const WP_API_URL = BASE_URL + 'wp-json/wp/v2/';//todo: must be deleted
 
-const LAST_4_POSTS_END_URL = 'posts?per_page=4';
-const MEDIA_END_URL = 'media/';
-const WELLBEING_END_URL = 'wellbeing?per_page=100';
-const HELP_END_URL = 'app_help?per_page=100';
+const LAST_4_POSTS_END_URL = 'posts?per_page=4';//todo: must be deleted
+const MEDIA_END_URL = 'media/';//todo: must be deleted
+//const WELLBEING_END_URL = 'wellbeing?per_page=100';
+const HELP_END_URL = 'app_help?per_page=100';//todo: must be deleted
+
+
+const WELLBEING_END_URL = 'articles';
+const BASE_POST_IMAGE_URL = BASE_URL + 'admin/assets/img/articles/';
+//https://lifeontime.co.uk/api/admin/assets/img/articles/5e3896ba819b4.jpeg
 
 @Injectable( {
   providedIn: 'root'
@@ -24,6 +30,17 @@ export class PostService {
   constructor (
     private http: HttpClient
   ) { }
+
+  getArticlesByCategoryIdAndUserClassId( categoryId: string, classId: string ) {
+    return this.http.get( BASE_URL + WELLBEING_END_URL )
+      .pipe(
+        map( posts => {
+          return posts[ 'data' ].filter( post => post.categories.includes( categoryId ) & post.classes.includes( classId ) )
+        } )
+      );
+  }
+
+
 
   getLats4Posts(): Observable<Array<BlogPost>> {
     return this.http.get<Array<BlogPost>>( WP_API_URL + LAST_4_POSTS_END_URL )

@@ -1,5 +1,19 @@
 <ng-template [ngIf]="goal">
-    <div class="card" [id]="'g-'+ goal.id">
+    <div class="card">
+        <div class="card-header p-1">
+            <!-- <div id="headingCollapse14" class="card-header pb-3"> -->
+            <a class="card-title lead collapsed text-muted" [attr.aria-expanded]="!isGoalCollapsed" aria-controls="'g-'+ goal.id" (click)="isGoalCollapsed=!isGoalCollapsed">
+                {{goal.title}}
+                <span class="float-right">
+                    <!-- fa fa-caret-down -->
+                    <i *ngIf="isGoalCollapsed" class="fa fa-caret-down font-medium"></i>
+                    <i *ngIf="!isGoalCollapsed" class="fa fa-caret-up font-medium"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="card" [id]="'g-'+ goal.id" [ngbCollapse]="isGoalCollapsed">
         <div class="card-header">
             {{isGoalTasksCompleted}}
             <div class="buttons">
@@ -14,13 +28,15 @@
             <h4 class="card-title" [ngClass]=" {'goal-done': goal.status === 1}">{{goal.title}}
             </h4>
             <span class="small card-subtitle text-muted">From: &nbsp;
-                <span class="small" *ngIf='goal.created_at.day < 10'>0</span>{{goal.created_at.day}}/<span class="small" *ngIf='goal.created_at.month< 10'>0</span>{{goal.created_at.month}}/{{goal.created_at.year}}&nbsp; to:&nbsp;
-            <span *ngIf="goal.until_date" [ngClass]=" {'goal-date-ok': (goal.goalLeftDays < -3  || goal.status === 1), 'goal-date-warn': (goal.goalLeftDays < 1 &&
+                <span class="small" *ngIf='goal.created_at.day < 10'>0</span>{{goal.created_at.day}}/<span class="small" *ngIf='goal.created_at.month< 10'>0</span>{{goal.created_at.month}}/{{goal.created_at.year}}&nbsp;
+            <p>to:&nbsp;
+                <span *ngIf="goal.until_date" [ngClass]=" {'goal-date-ok': (goal.goalLeftDays < -3  || goal.status === 1), 'goal-date-warn': (goal.goalLeftDays < 1 &&
                     goal.goalLeftDays > -4 && goal.status === 0), 'goal-date-over': (goal.goalLeftDays > 0 &&
                     goal.status === 0)}">
-                    <span class="small" *ngIf='goal.until_date.day < 10'>0</span>{{goal.until_date.day}}/
-            <span class="small" *ngIf='goal.until_date.month< 10'>0</span>{{goal.until_date.month}}/{{goal.until_date.year}}
-            </span>
+                        <span class="small" *ngIf='goal.until_date.day < 10'>0</span>{{goal.until_date.day}}/
+                <span class="small" *ngIf='goal.until_date.month< 10'>0</span>{{goal.until_date.month}}/{{goal.until_date.year}}
+                </span>
+            </p>
             </span>
             <p class="card-subtitle text-muted">{{goal.description}}</p>
         </div>

@@ -10,9 +10,6 @@ import { IdeaService } from 'app/shared/services/idea.service';
 
 import { UserService } from 'app/shared/services/user.service';
 import { BarChartData } from 'app/shared/models/barChartData';
-import { BlogPost } from 'app/shared/models/blogPost';
-import { PostService } from 'app/shared/services/post.service';
-
 
 @Component( {
   selector: 'app-progress-dashboard',
@@ -27,7 +24,6 @@ export class ProgressDashboardComponent implements OnInit, OnDestroy {
   barChart$: Observable<BarChartData>;
   minStaticsDataFirstRow = minStatisticData.firstRow;
   minStaticsDataSecondRow = minStatisticData.secondRow;
-  blogPosts: Array<BlogPost>;
   calendarEvents: any;
   isChartsCollapsed: boolean = true;
   private minStatSubscription: Subscription;
@@ -41,9 +37,7 @@ export class ProgressDashboardComponent implements OnInit, OnDestroy {
     private goalService: GoalService,
     private ideasService: IdeaService,
     private userServise: UserService,
-    private postService: PostService,
   ) {
-
   }
 
   ngOnInit() {
@@ -79,25 +73,12 @@ export class ProgressDashboardComponent implements OnInit, OnDestroy {
 
     //this.donutCharts$ = this.goalService.getUserLastThreeGoalsStatistic();
     this.barChart$ = this.goalService.getUserGoalsAndTasksByCategoryAsNumber();
-    this.PostsSubscripton = this.postService.getLats4Posts()
-      .subscribe( posts => {
-        for ( const post of posts ) {
-          this.blogPosts = posts;
-          if ( post.mediaId > '0' ) {
-            this.singlePostSub = this.postService.getPostMedia( post.mediaId )
-              .subscribe( imageUrl => {
-                post.imageUrl = imageUrl;
-              } )
-          }
-        }
-      } );
 
     this.calendarSubs =
       this.userServise.getTaskAndGoalsForCalendar()
         .subscribe( data => {
           this.calendarEvents = data;
         } )
-
   }
 
   changeIsChartsCollapsed() {

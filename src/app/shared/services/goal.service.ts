@@ -81,7 +81,7 @@ export class GoalService {
         map( data => {
           if ( data[ 'dataValue' ][ category ] ) {
             const completedGoals = [];
-            const upcommingGoals = [];
+            const upcomingGoals = [];
             data[ 'dataValue' ][ category ][ 'goals' ].map( goal => {
               const goalLeftDays = Math.round( ( Date.now() - +( new Date( goal.until_date ) ) ) / ( 60 * 60 * 24 * 1000 ) );
 
@@ -118,64 +118,16 @@ export class GoalService {
               if ( goal.status == '1' ) {
                 completedGoals.push( goal );
               } else {
-                upcommingGoals.push( goal );
+                upcomingGoals.push( goal );
               }
             } )
-            return { completedGoals, upcommingGoals }
+            return { completedGoals, upcomingGoals: upcomingGoals }
           } else {
-            return { completedGoals: [], upcommingGoals: [] };
+            return { completedGoals: [], upcomingGoals: [] };
           }
         } )
       );
   }
-
-  // getGoalsByCategory( category: string ): Observable<Array<Goal>> {
-  //   return this.http.get<Array<Goal>>( BASE_URL + USER_GOALS_END )
-  //     .pipe(
-  //       map( data => {
-  //         if ( data[ 'dataValue' ][ category ] ) {
-  //           return data[ 'dataValue' ][ category ][ 'goals' ].map( goal => {
-  //             const goalLeftDays = Math.round( ( Date.now() - +( new Date( goal.until_date ) ) ) / ( 60 * 60 * 24 * 1000 ) );
-
-  //             goal.goalLeftDays = goalLeftDays;
-  //             if ( goal.until_date ) {
-  //               const goalDueDateAsString = goal.until_date.split( '-' );
-  //               goal.until_date = {
-  //                 day: Number( goalDueDateAsString[ 2 ] ),
-  //                 month: Number( goalDueDateAsString[ 1 ] ),
-  //                 year: Number( goalDueDateAsString[ 0 ] )
-  //               };
-  //             }
-
-  //             if ( goal.created_at ) {
-  //               const goalCreatedDateAsString = ( goal.created_at.split( ' ' ) )[ 0 ].split( '-' );
-  //               goal.created_at = {
-  //                 day: Number( goalCreatedDateAsString[ 2 ] ),
-  //                 month: Number( goalCreatedDateAsString[ 1 ] ),
-  //                 year: Number( goalCreatedDateAsString[ 0 ] )
-  //               };
-  //             }
-
-  //             goal.tasks.map( task => {
-  //               const taskLeftDays = Math.round( ( Date.now() - +( new Date( task.until_date ) ) ) / ( 60 * 60 * 24 * 1000 ) );
-  //               task.taskLeftDays = taskLeftDays;
-  //               const taskDueDateAsString = task.until_date.split( '-' );
-  //               task.until_date = {
-  //                 day: Number( taskDueDateAsString[ 2 ] ),
-  //                 month: Number( taskDueDateAsString[ 1 ] ),
-  //                 year: Number( taskDueDateAsString[ 0 ] )
-  //               }
-  //               return task;
-  //             } )
-
-  //             return goal;
-  //           } )
-  //         } else {
-  //           return [];
-  //         }
-  //       } )
-  //     );
-  // }
 
   getUserLastThreeGoalsStatistic(): Observable<Array<any>> {
     return this.http.get<Array<any>>( BASE_URL + USER_LAST_THREE_GOALS_END )

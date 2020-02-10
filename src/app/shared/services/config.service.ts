@@ -20,7 +20,9 @@ export class ConfigService {
                 sidebar: {
                     collapsed: false, //options: true, false
                     size: 'sidebar-md', // Options: 'sidebar-lg', 'sidebar-md', 'sidebar-sm'
-                    backgroundColor: "primary-cyan", // Options: 'black', 'pomegranate', 'king-yna', 'ibiza-sunset', 'flickr', 'purple-bliss', 'man-of-steel', 'purple-love', "primary-cyan"
+                    //backgroundColor: "linear- gradient( ${ start }, ${ end }"
+                    backgroundColor: 'linear-gradient( blue, red)',
+                    //backgroundColor: "primary-cyan", // Options: 'black', 'pomegranate', 'king-yna', 'ibiza-sunset', 'flickr', 'purple-bliss', 'man-of-steel', 'purple-love', "primary-cyan"
                     backgroundImage: true, // Options: true, false | Set true to show background image
                     backgroundImageURL: 'assets/img/sidebar-bg/01.jpg'
                 }

@@ -61,7 +61,7 @@ export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     private configService: ConfigService,
     @Inject( DOCUMENT ) private document: Document,
     private renderer: Renderer2,
-    private userService: UserService
+    //private userService: UserService
   ) {
     //event emitter call from customizer
     this.layoutSub = layoutService.customizerChangeEmitted$.subscribe(
