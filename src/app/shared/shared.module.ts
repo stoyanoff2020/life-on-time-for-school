@@ -22,6 +22,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { ModalCreateEditComponent } from './modal-create-edit/modal-create-edit.component';
 import { ModalIdeaCreateEditComponent } from './modal-idea-create-edit/modal-idea-create-edit.component';
 import { ModalUploadComponent } from './modal-upload/modal-upload.component';
+import { ModalCommentComponent } from './modal-comment/modal-comment.component';
 
 //DIRECTIVES
 import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
@@ -35,6 +36,7 @@ import { ConfirmEqualValidatorDirective } from './directives/confirm-equal-valid
 import { environment } from 'environments/environment';
 
 import { SafePipe } from './pipes/safe-pipe';
+import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     // Change this to your upload POST address:
@@ -99,6 +101,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         ModalCreateEditComponent,
         ModalIdeaCreateEditComponent,
         ModalUploadComponent,
+        ModalCommentComponent,
+        ModalProfileComponent,
     ],
     providers: [
         {
@@ -111,6 +115,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         ModalCreateEditComponent,
         ModalIdeaCreateEditComponent,
         ModalUploadComponent,
+        ModalCommentComponent,
+        ModalProfileComponent,
     ]
 } )
 export class SharedModule { }

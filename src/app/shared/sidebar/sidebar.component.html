@@ -3,14 +3,13 @@
     <div class="logo clearfix">
         <a [routerLink]="['/']" class="logo-text text-center">
             <div class="logo-img">
-                <img [src]="logoUrl" />
+                <img [src]="logoUrl ? logoUrl : 'assets/img/logo.png'" />
             </div>
-            <!-- <span class="text align-middle">Life On Time</span> -->
         </a>
     </div>
+    <h4 class="align-middle text-black-50">{{schoolName}}</h4>
 </div>
 <!-- Sidebar Header Ends-->
-
 <!-- Sidebar Content starts -->
 <div class="sidebar-content" [perfectScrollbar]>
     <div class="nav-container">

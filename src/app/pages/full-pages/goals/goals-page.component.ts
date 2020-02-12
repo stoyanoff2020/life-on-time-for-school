@@ -68,26 +68,36 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // console.log( this.router[ 'rawUrlTree' ].fragment );
-    // this.vps.scrollToAnchor( 'me' );
-    //this.router.events.subscribe( e => console.log( e ) );
     this.pathSubs = this.route.url.subscribe( data => {
       this.path = data[ 0 ].path;
 
-      this.goalCategoriesSubscription = this.userService.getUserAvailableCategoriesObj()
-        .subscribe( ( studentInfo ) => {
-          console.log( studentInfo.categories );
-          this.globalService.setAppCategories( studentInfo.categories );
-          this.currentUserClass = studentInfo.class;
-          this.goalCategories = studentInfo.categories;
-          this.currentGoalCategory = this.goalCategories
-            .find( category => category.pathEnd === this.path );
-          if ( !this.currentGoalCategory ) {
-            this.router.navigate( [ "/error" ] )
-          } else {
-            this.loadPageGoals();
-          }
-        } );
+      if ( this.globalService.getAppCategories() ) {
+        this.goalCategories = this.globalService.getAppCategories();
+        this.currentUserClass = this.globalService.getUserClass();
+        this.currentGoalCategory = this.goalCategories
+          .find( category => category.pathEnd === this.path );
+        if ( !this.currentGoalCategory ) {
+          this.router.navigate( [ "/error" ] )
+        } else {
+          this.loadPageGoals();
+        }
+      } else {
+        this.goalCategoriesSubscription = this.userService.getUserAvailableCategoriesAndUserClass()
+          .subscribe( ( studentInfo ) => {
+            this.globalService.setAppCategories( studentInfo.categories );
+            this.currentUserClass = studentInfo.class;
+            this.goalCategories = studentInfo.categories;
+            this.currentGoalCategory = this.goalCategories
+              .find( category => category.pathEnd === this.path );
+            if ( !this.currentGoalCategory ) {
+              this.router.navigate( [ "/error" ] )
+            } else {
+              this.loadPageGoals();
+            }
+          } );
+      }
+
+
     } )
     this.modalCreateSubscription = this.eventService.on( 'confirm create/edit', ( actionInfo => this.mapAction( actionInfo ) ) );
     this.modalDeleteSubscription = this.eventService.on( 'confirm delete', ( itemInfo => this.deleteItem( itemInfo ) ) );

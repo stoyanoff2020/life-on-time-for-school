@@ -15,12 +15,8 @@ import { LayoutService } from "app/shared/services/layout.service";
 import { Subscription } from "rxjs";
 import { Category } from 'app/shared/models/category';
 import { UserService } from 'app/shared/services/user.service';
-
-// declare global {
-//   interface Window {
-//     categories: Array<Category>;
-//   }
-// }
+import { ApplicationService } from 'app/shared/services/application.service';
+import { GlobalService } from 'app/shared/services/global.service';
 
 var fireRefreshEventOnWindow = function () {
   var evt = document.createEvent( "HTMLEvents" );
@@ -34,11 +30,11 @@ var fireRefreshEventOnWindow = function () {
   styleUrls: [ "./full-layout.component.scss" ]
 } )
 export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild( "sidebarBgImage", { static: true } ) sidebarBgImage: ElementRef;
+  //@ViewChild( "sidebarBgImage", { static: true } ) sidebarBgImage: ElementRef;
   @ViewChild( "appSidebar", { static: true } ) appSidebar: ElementRef;
   @ViewChild( "wrapper", { static: true } ) wrapper: ElementRef;
 
-  categorySubscribtion: Subscription;
+
 
   options = {
     direction: "ltr",
@@ -52,17 +48,25 @@ export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   isSidebar_lg = false;
   bgColor = "black";
   bgImage = "assets/img/sidebar-bg/01.jpg";
+  logoUrl: string;
+  schoolName: string;
+  sidebarGradient: string = 'linear-gradient( #ff2f92, #0433ff)';
 
   public config: any = {};
+
+  private appSettingsSubs: Subscription;
 
   constructor (
     private elementRef: ElementRef,
     private layoutService: LayoutService,
     private configService: ConfigService,
+    private appService: ApplicationService,
+    private globalService: GlobalService,
     @Inject( DOCUMENT ) private document: Document,
     private renderer: Renderer2,
     //private userService: UserService
   ) {
+
     //event emitter call from customizer
     this.layoutSub = layoutService.customizerChangeEmitted$.subscribe(
       options => {
@@ -72,28 +76,28 @@ export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
           }
           if ( options.bgImage ) {
             this.bgImage = options.bgImage;
-            this.renderer.setAttribute(
-              this.sidebarBgImage.nativeElement,
-              "style",
-              'background-image: url("' + this.bgImage + '")'
-            );
+            // this.renderer.setAttribute(
+            //   this.sidebarBgImage.nativeElement,
+            //   "style",
+            //   'background-image: url("' + this.bgImage + '")'
+            // );
           }
 
           if ( options.bgImageDisplay === true ) {
             this.bgImage = options.bgImage;
-            this.renderer.setAttribute(
-              this.sidebarBgImage.nativeElement,
-              "style",
-              'display: block; background-image: url("' + this.bgImage + '")'
-            );
+            // this.renderer.setAttribute(
+            //   this.sidebarBgImage.nativeElement,
+            //   "style",
+            //   'display: block; background-image: url("' + this.bgImage + '")'
+            // );
           } else if ( options.bgImageDisplay === false ) {
             this.bgImage = "";
             // this.renderer.setAttribute(this.sidebarBgImage.nativeElement, 'style', 'display: none');
-            this.renderer.setAttribute(
-              this.sidebarBgImage.nativeElement,
-              "style",
-              "background-image: none"
-            );
+            // this.renderer.setAttribute(
+            //   this.sidebarBgImage.nativeElement,
+            //   "style",
+            //   "background-image: none"
+            // );
           }
 
           if ( options.compactMenu === true ) {
@@ -196,6 +200,23 @@ export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    const appSettings = this.globalService.getAppSettings();
+    if ( appSettings ) {
+      this.logoUrl = appSettings.schoolLogo;
+      this.schoolName = appSettings.schoolName;
+      this.sidebarGradient = `linear-gradient(${appSettings.startColor},${appSettings.endColor})`;
+    } else {
+      this.appSettingsSubs = this.appService
+        .getAppSettings()
+        .subscribe( settings => {
+          this.globalService.setAppSettings( settings );
+          this.sidebarGradient = `linear-gradient(${settings.startColor},${settings.endColor})`;
+          this.logoUrl = settings.schoolLogo;
+          this.schoolName = settings.schoolName;
+        } )
+    }
+
     this.config = this.configService.templateConf;
     this.bgColor = this.config.layout.sidebar.backgroundColor;
 
@@ -268,11 +289,11 @@ export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
         this.bgImage = "";
         this.options.bgImage = "";
         this.bgImage = "";
-        this.renderer.setAttribute(
-          this.sidebarBgImage.nativeElement,
-          "style",
-          "background-image: none"
-        );
+        // this.renderer.setAttribute(
+        //   this.sidebarBgImage.nativeElement,
+        //   "style",
+        //   "background-image: none"
+        // );
       }
     }, 0 );
   }
@@ -281,9 +302,9 @@ export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     if ( this.layoutSub ) {
       this.layoutSub.unsubscribe();
     }
-    // if ( this.categorySubscribtion ) {
-    //   this.categorySubscribtion.unsubscribe();
-    // }
+    if ( this.appSettingsSubs ) {
+      this.appSettingsSubs.unsubscribe();
+    }
   }
 
   onClick( event ) {

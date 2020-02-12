@@ -27,32 +27,6 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getUserClass(): Observable<UserAppInfo> {
-    return this.http.get<UserAppInfo>( BASE_URL )
-      .pipe(
-        map( data => {
-          console.log( data );
-          const categoriesData = data[ 'data' ][ 'categories' ];
-          const categories = [];
-          Object.entries<string>( categoriesData ).forEach( ( [ id, title ] ) => {
-            const category = {
-              id,
-              title,
-              pathEnd: `${title.trim().toLowerCase().split( ' ' ).join( '-' )}`
-            }
-            categories.push( category );
-          } )
-          const userInfo: UserAppInfo = {
-            categories: categories,
-            appType: data[ 'data' ][ 'applicationType' ][ 'name' ],
-            maxGoals: data[ 'data' ][ 'maxGoals' ],
-            maxTasks: data[ 'data' ][ 'maxTasks' ]
-          }
-          return userInfo;
-        } )
-      )
-  }
-
   getUserRegistrationDate(): Observable<string> {
     return this.http.get( BASE_URL )
       .pipe(
@@ -65,11 +39,10 @@ export class UserService {
         } ) )
   }
 
-  getUserAvailableCategoriesObj() {
-    return this.http.get( BASE_URL )
+  getUserAvailableCategoriesAndUserClass(): Observable<UserAppInfo> {
+    return this.http.get<UserAppInfo>( BASE_URL )
       .pipe(
         map( data => {
-          console.log( data );
           const categories = data[ 'data' ][ 'categories_objects' ]
             .map( category => {
               category.title = category.name,
@@ -81,19 +54,19 @@ export class UserService {
       );
   }
 
-  getUserAllowedNumberGoalsAndTasks() {
-    return this.http.get( BASE_URL )
-      .pipe(
-        map( data => {
-          return {
-            createdGoals: data[ 'createdGoals' ],
-            createdTasks: data[ 'createdTasks' ],
-            maxGoals: data[ 'maxGoals' ],
-            maxTasks: data[ 'maxTasks' ],
-          }
-        } )
-      )
-  }
+  // getUserAllowedNumberGoalsAndTasks() {
+  //   return this.http.get( BASE_URL )
+  //     .pipe(
+  //       map( data => {
+  //         return {
+  //           createdGoals: data[ 'createdGoals' ],
+  //           createdTasks: data[ 'createdTasks' ],
+  //           maxGoals: data[ 'maxGoals' ],
+  //           maxTasks: data[ 'maxTasks' ],
+  //         }
+  //       } )
+  //     )
+  // }
 
   getUserAppTypeId(): Observable<string> {
     return this.http.get<number>( BASE_URL )

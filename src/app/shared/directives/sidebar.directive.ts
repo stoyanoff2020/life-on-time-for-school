@@ -43,9 +43,9 @@ export class SidebarDirective implements OnInit, AfterViewInit {
     const $sidebar_img_container = this.el.nativeElement.querySelector( '.sidebar-background' );
     const $sidebar_img = element.getAttribute( "data-image" );
 
-    if ( $sidebar_img_container.length !== 0 && $sidebar_img !== undefined ) {
-      this.renderer.setAttribute( $sidebar_img_container, 'style', 'background-image: url("' + $sidebar_img + '")' );
-    }
+    // if ( $sidebar_img_container.length !== 0 && $sidebar_img !== undefined ) {
+    //   this.renderer.setAttribute( $sidebar_img_container, 'style', 'background-image: url("' + $sidebar_img + '")' );
+    // }
 
     if ( !this.$wrapper.classList.contains( "nav-collapsed" ) ) {
       this.expandActive();

@@ -1,8 +1,6 @@
 import { Category } from './category';
 
 export interface UserAppInfo {
+  class: string,
   categories: Array<Category>,
-  appType: string,
-  maxGoals: number,
-  maxTasks: number,
 }

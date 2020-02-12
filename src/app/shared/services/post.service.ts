@@ -35,7 +35,11 @@ export class PostService {
     return this.http.get( BASE_URL + WELLBEING_END_URL )
       .pipe(
         map( posts => {
-          return posts[ 'data' ].filter( post => post.categories.includes( categoryId ) & post.classes.includes( classId ) )
+          return posts[ 'data' ].filter( post => post.categories.includes( categoryId ) & post.classes.includes( classId ) ).
+            map( post => {
+              post.imageUrl = post.image ? BASE_POST_IMAGE_URL + post.image : null;
+              return post;
+            } )
         } )
       );
   }

@@ -1,8 +1,11 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
-import { AuthService } from 'app/shared/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { ApplicationService } from 'app/shared/services/application.service';
+import { AuthService } from 'app/shared/auth/auth.service';
+import { GlobalService } from 'app/shared/services/global.service';
+import { UserService } from 'app/shared/services/user.service';
 
 @Component( {
   selector: 'app-login-page',
@@ -10,25 +13,52 @@ import { Subscription } from 'rxjs';
   styleUrls: [ './login-page.component.scss' ]
 } )
 
-export class LoginPageComponent implements OnDestroy {
+export class LoginPageComponent implements OnInit, OnDestroy {
+
   @ViewChild( 'loginForm', { static: true } ) loginForm: NgForm;
 
-  private loginSubscription: Subscription;
+  schoolLogo: string;
+  schoolName: string;
+  private loginSubs: Subscription;
+  private appSettingsSubs: Subscription;
+  private userSubs: Subscription;
 
   constructor (
     private authService: AuthService,
+    private appService: ApplicationService,
+    private globalService: GlobalService,
+    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute ) { }
 
+  ngOnInit(): void {
+    this.appSettingsSubs =
+      this.appService
+        .getAppSettings()
+        .subscribe( settings => {
+          console.log( settings );
+          this.schoolLogo = settings.schoolLogo;
+          this.schoolName = settings.schoolName;
+          this.globalService.setAppSettings( settings );
+        } )
+  }
+
   // On submit button click
   login() {
-    this.loginSubscription = this.authService
+    this.loginSubs = this.authService
       .loginUser( this.loginForm.value )
       .subscribe( data => {
-        this.authService.setToken( data[ 'data' ].token );
         if ( this.loginForm.valid ) {
-          this.loginForm.reset();
-          this.router.navigate( [ '/progress-dashboard' ] );
+          this.authService.setToken( data[ 'data' ].token );
+          this.userSubs =
+            this.userService
+              .getUserAvailableCategoriesAndUserClass()
+              .subscribe( data => {
+                this.globalService.setAppCategories( data.categories );
+                this.globalService.setUserClass( data.class );
+                this.loginForm.reset();
+                this.router.navigate( [ '/progress-dashboard' ] );
+              } )
         }
       } )
   }
@@ -42,8 +72,14 @@ export class LoginPageComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if ( this.loginSubscription ) {
-      this.loginSubscription.unsubscribe();
+    if ( this.loginSubs ) {
+      this.loginSubs.unsubscribe();
+    }
+    if ( this.appSettingsSubs ) {
+      this.appSettingsSubs.unsubscribe();
+    }
+    if ( this.userSubs ) {
+      this.userSubs.unsubscribe();
     }
   }
 }
