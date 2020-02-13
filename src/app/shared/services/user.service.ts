@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "environments/environment";
 import { map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Category } from "../models/category";
+import { UserInfo, NewUserInfo } from "../models/userInfo";
 import { UserAppInfo } from '../models/userAppInfo';
 
 const BASE_URL = environment.apiUrl + 'me';
@@ -27,6 +27,24 @@ export class UserService {
     private http: HttpClient
   ) { }
 
+  getCurrenrUserInfo(): Observable<UserInfo> {
+    return this.http.get<UserInfo>( BASE_URL )
+      .pipe(
+        map( data => {
+          const user = data[ 'data' ];
+          return {
+            name: user.name,
+            class: user.class,
+            mood: user.mood,
+            email: user.email,
+          }
+        } )
+      )
+  }
+
+  putEditCurrentUserInfo( newUserInfo: NewUserInfo ) {
+    return this.http.put( BASE_URL, newUserInfo );
+  }
   getUserRegistrationDate(): Observable<string> {
     return this.http.get( BASE_URL )
       .pipe(

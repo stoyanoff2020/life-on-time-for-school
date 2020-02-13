@@ -1,4 +1,4 @@
-<form [formGroup]="modalForm" (ngSubmit)="onAction(task.id)">
+<form [formGroup]="modalForm" (ngSubmit)="onAddComment(actionType, itemType, itemId, itemStatus)">
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title" id="actionModal">Add comment</h4>
@@ -8,15 +8,15 @@
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="title">Comment</label>
-                <input class="form-control" type="text" id="title" placeholder="Here you can input comment for your task." formControlName='title' required>
+                <label for="feedback">Comment</label>
+                <textarea #feedback class="form-control" type="text" id="feedback" placeholder="Here you can add comment for your task." formControlName="feedback" required></textarea>
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-light" [disabled]="modalForm.invalid">Skip
+                <button type="button" class="btn  btn-outline-warning" (click)="onSkip('skipComment',itemType,itemId, itemStatus)">Skip
         </button>
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cancel click')">Cancel</button>
-                <button type="submit" class="btn btn-outline-primary" [disabled]="modalForm.invalid">Add Comment
+                <button type=" button " class="btn btn-outline-secondary " data-dismiss="modal " (click)="modal.dismiss( 'Cancel click') ">Cancel</button>
+                <button type="submit " class="btn btn-outline-primary " [disabled]="modalForm.invalid ">Add Comment
         </button>
             </div>
         </div>

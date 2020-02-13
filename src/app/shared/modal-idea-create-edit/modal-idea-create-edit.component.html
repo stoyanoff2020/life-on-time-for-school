@@ -30,75 +30,9 @@
 
             <!--for from group name info-->
         </div>
-
-        <!--  ---------------------------    start upload files-->
-
-
-        <!-- <div class="form-group">
-            <div class="media-list">
-                <div id="imagesCollapse" class="card-header p-0">
-                    <a class="collapsed email-app-sender list-group-item list-group-item-action border-0" [attr.aria-expanded]="!isIdeaImagesCollapsed" aria-controls="images" (click)="isIdeaImagesCollapsed=!isIdeaImagesCollapsed" aria-controls="imagesModal">
-
-                        <div class="media">
-                            <div class="media-body">
-                                <h6 class="list-group-item-heading text-bold-500">Add Images to your idea
-                                    <span class="float-right">
-                    <i class="ft-chevron-down font-medium"></i>
-                  </span>
-                                </h6>
-                            </div>
-                        </div>
-
-                    </a>
-                </div>
-                <div id="imagesModal" [ngbCollapse]="isIdeaImagesCollapsed">
-                    <div class="card-content">
-                        <div class="email-app-text card-body" style="position: relative;">
-                            <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
-                                <div class="dropzone dropzone-container" [dropzone]="configDrop" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)">
-                                    <div class="dz-message">Drop images for upload here</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div id="filesCollapse" class="card-header p-0">
-                    <a class="collapsed email-app-sender list-group-item list-group-item-action border-0" [attr.aria-expanded]="!isIdeaFilesCollapsed" aria-controls="filesModal" (click)="isIdeaFilesCollapsed=!isIdeaFilesCollapsed">
-
-                        <span class="media">
-              <div class="media-body">
-                <h6 class="list-group-item-heading text-bold-500">Add files to your idea
-                  <span class="float-right">
-                    <i class="ft-chevron-down font-medium"></i>
-                  </span>
-                        </h6>
-                </div>
-                </span>
-                </a>
-            </div>
-
-            <div id="filesModal" [ngbCollapse]="isIdeaFilesCollapsed">
-                <div class="card-content">
-                    <div class="card-body" style="position: relative;">
-                        <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
-
-                            <div class="dropzone dropzone-container" [dropzone]="configDrop" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (addedfile)="addedFile($event)">
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
- -->
-
-        <!--  ---------------------------    end upload files-->
     </div>
     <div class="modal-footer px-4">
-        <button type="button" class="btn grey btn-outline-secondary" (click)="modal.dismiss('Cancel click')">Cancel</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cancel click')">Cancel</button>
         <button type="submit" class="btn  btn-outline-primary" [disabled]="modalForm.invalid">{{actionType | titlecase}}
             Idea</button>
     </div>

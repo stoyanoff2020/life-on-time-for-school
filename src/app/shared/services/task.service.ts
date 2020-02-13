@@ -53,6 +53,7 @@ export class TaskService {
   }
 
   putEditTaskById( id: string, task: TaskCreate ): Observable<Task> {
+    console.log( task );
     return this.http.put<Task>( BASE_CRUD_URL + `/${id}`, task );
   }
 

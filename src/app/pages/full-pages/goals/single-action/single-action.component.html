@@ -6,11 +6,18 @@
                     task.status == 0)}"> <span *ngIf='task.until_date.day < 10'>0</span>{{task.until_date.day}}/<span *ngIf='task.until_date.month< 10'>0</span>{{task.until_date.month}}/{{task.until_date.year}}
             </span>
             <p id="action{{task.id}}" [ngClass]=" {'action-date-ok': task.status == 1}">{{task.title}}</p>
+            <h5 *ngIf="task.feedback">Comment:</h5>
+            <p>{{task.feedback}}</p>
         </td>
         <td style="width: 25%">
-            <a class="success p-0" data-original-title="" alt="Complete Action" title="Complete Action" data-toggle="modal" data-target="#action" (click)="changeStatus('action', task.id, task.status)">
+            <!-- Start change task status and add comment when task is completed -->
+            <a *ngIf="task.status == 1" class="success p-0" data-original-title="" alt="Complete Action" title="Activate Action" data-toggle="modal" data-target="#action" (click)="changeStatus('action', task.id, task.status)">
                 <i class="ft-check font-medium-3 mr-1"></i>
             </a>
+            <a *ngIf="task.status == 0" class="success p-0" data-original-title="" alt="Complete Action" title="Complete Action" data-toggle="modal" data-target="#action" (click)="openModal('commentModal', 'action', 'addComment', task)">
+                <i class="ft-check text-warning font-medium-3 mr-1"></i>
+            </a>
+            <!-- End change task status and add comment when task is completed -->
             <a class="goal-edit p-0" data-original-title="" alt="Edit Action" title="Edit Action" data-toggle="modal" data-target="#action" ngbPopover="If you want to edit the task, you need to update goal due date first!" [triggers]="isGoalExpired ? 'mouseenter:mouseleave' : 'manual'"
                 popoverTitle="Change goal due date first!" (click)="!isGoalExpired ? openModal('createEditModal', 'action', 'edit', task, goalUntilDate) : null" [class.disabled]="isGoalExpired
                 ? true: null">

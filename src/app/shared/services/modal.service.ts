@@ -17,16 +17,47 @@ export class ModalService {
 
   open( name: string, itemType: string, actionType: string, itemInfo?: any, date?: SeparatedDate ) {
     const modalRef = this.modalService.open( Modals[ name ] );
-    if ( name === 'createEditModal' ) {
-      this.setEditCreateModalProps( modalRef, itemType, actionType, itemInfo, date );
-    } else if ( name === 'confirmModal' ) {
-      this.setConfirmModalProps( modalRef, itemType, itemInfo );
-    } else if ( name === 'createEditIdeaModal' ) {
-      this.setEditCreateIdeaModalProps( modalRef, actionType, itemType, itemInfo );
-    } else if ( name === 'uploadModal' ) {
-      modalRef.componentInstance.isImages = ( itemType == 'images' );
-      modalRef.componentInstance.userId = itemInfo;
+    switch ( name ) {
+      case 'createEditModal': this.setEditCreateModalProps( modalRef, itemType, actionType, itemInfo, date );
+        break;
+      case 'confirmModal': this.setConfirmModalProps( modalRef, itemType, itemInfo );
+        break;
+      case 'createEditIdeaModal': this.setEditCreateIdeaModalProps( modalRef, actionType, itemType, itemInfo );
+        break;
+      case 'uploadModal': {
+        modalRef.componentInstance.isImages = ( itemType == 'images' );
+        modalRef.componentInstance.userId = itemInfo;
+      }
+        break;
+      case 'commentModal': {
+        modalRef.componentInstance.itemId = itemInfo.id;
+        modalRef.componentInstance.itemStatus = itemInfo.status;
+        modalRef.componentInstance.actionType = actionType; modalRef.componentInstance.itemType = itemType;
+      }
+        break;
+      //('openProfileModal', 'userProfile', 'edit', 'userInfo')
+      case 'profileModal': {
+        modalRef.componentInstance.user = itemInfo;
+        modalRef.componentInstance.actionType = actionType; modalRef.componentInstance.itemType = itemType;
+      }
+        break;
+
+      default:
+        break;
     }
+    // if ( name === 'createEditModal' ) {
+    //   this.setEditCreateModalProps( modalRef, itemType, actionType, itemInfo, date );
+    // } else if ( name === 'confirmModal' ) {
+    //   this.setConfirmModalProps( modalRef, itemType, itemInfo );
+    // } else if ( name === 'createEditIdeaModal' ) {
+    //   this.setEditCreateIdeaModalProps( modalRef, actionType, itemType, itemInfo );
+    // } else if ( name === 'uploadModal' ) {
+    //   modalRef.componentInstance.isImages = ( itemType == 'images' );
+    //   modalRef.componentInstance.userId = itemInfo;
+    // }
+
+
+
 
     // modalRef.result.then( ( result ) => {
     //   //this.closeResult = `Closed with: ${result}`;
@@ -47,6 +78,7 @@ export class ModalService {
   openFromTemplate( templateName ) {
     return this.modalService.open( templateName );
   }
+
   private setEditCreateModalProps( modalRef: NgbModalRef, itemType: string, actionType: string, itemInfo?: any, date?: SeparatedDate
   ) {
     if ( actionType === 'create' ) {

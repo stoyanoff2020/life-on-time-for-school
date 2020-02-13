@@ -3,5 +3,6 @@ export interface TaskCreate {
   goal_id?: string,
   title?: string,
   until_date?: string,
-  status?: number
+  status?: number,
+  feedBack?: string,
 }

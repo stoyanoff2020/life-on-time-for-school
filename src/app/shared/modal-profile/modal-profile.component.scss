@@ -1,5 +1,5 @@
 .modal-header {
-    background-color: #009DA0
+    background-color: #009DA0;
 }
 
 button.close {
@@ -8,4 +8,37 @@ button.close {
 
 button:disabled {
     cursor: not-allowed;
+}
+
+
+/* HIDE RADIO */
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+/* IMAGE STYLES */
+
+[type=radio]+img {
+    cursor: pointer;
+    filter: blur(2px);
+}
+
+
+/* CHECKED STYLES */
+
+[type=radio]:checked+img {
+    filter: none;
+}
+
+[type=radio]+img:hover {
+    filter: none;
+}
+
+[type=radio]+img {
+    width: 30%;
 }

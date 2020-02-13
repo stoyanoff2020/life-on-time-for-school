@@ -30,10 +30,6 @@ export class AuthService {
     return this.http.post( BASE_URL + LOGIN_END_URL, body )
   }
 
-  getUsers() {
-    return this.http.get( 'me' );
-  }
-
   logout() {
     return this.http.get( BASE_URL + LOGOUT_END_URL )
   }

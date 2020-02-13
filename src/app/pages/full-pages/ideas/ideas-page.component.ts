@@ -164,7 +164,7 @@ export class IdeasPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.goalService.postCreateGoal( goal )
         .subscribe( data => {
           const navigatePath = this.globalService.getAppCategories().find( c => c.id == goal.category_id ).pathEnd;
-          this.router.navigate( [ '/goals', navigatePath ] )
+          this.router.navigate( [ '/values', navigatePath ] )
         } )
   }
 

@@ -93,9 +93,14 @@
                                 <i class="ft-credit-card mr-2"></i>
                                 <span>Billings</span>
                             </a>  -->
-                            <a class="dropdown-item py-1" (click)="showCustomizer()">
+                            <!-- <a class="dropdown-item py-1" (click)="showCustomizer()">
                                 <i class="ft-settings mr-2"></i>
                                 <span>App Settings</span>
+                            </a> -->
+                            <!-- ('openProfileModal', 'userProfile', 'edit', 'userInfo') -->
+                            <a class="dropdown-item py-1" (click)="openProfileModal('profileModal', 'userProfile', 'edit', userInfo)">
+                                <i class="ft-settings mr-2"></i>
+                                <span>User Settings</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" (click)="logout()">

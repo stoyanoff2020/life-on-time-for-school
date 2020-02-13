@@ -1,24 +1,48 @@
-<form [formGroup]="modalForm" (ngSubmit)="onAction(user.id)">
+<form [formGroup]="modalForm" (ngSubmit)="onSave(actionType, itemType)">
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title" id="actionModal">My Profile</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="title">My Mude</label>
-                <input class="form-control" type="text" id="title" placeholder="Here you can input comment for your task." formControlName='title' required>
-            </div>
+                <label for="mood">My Mood</label>
+                <br>
+                <div class="mood-group">
+                    <label>
+                        <input #mood type="radio" formControlName="mood" value="1">
+                        <img src="assets/img/mood_icons/angry.png">
+                    </label>
+                    <label>
+                        <input #mood type="radio" formControlName="mood" value="2">
+                        <img src="assets/img/mood_icons/sad.png">
+                    </label>
+                    <label>
+                        <input #mood type="radio" formControlName="mood" value="3">
+                        <img src="assets/img/mood_icons/neutral.png">
+                    </label>
+                    <label>
+                        <input #mood type="radio" formControlName="mood" value="4">
+                        <img src="assets/img/mood_icons/happy.png">
+                    </label>
+                    <label>
+                        <input #mood type="radio" formControlName="mood" value="5">
+                        <img src="assets/img/mood_icons/very-happy.png">
+                    </label>
 
-            <h5>Name and Class</h5>
-            <h4>userName</h4>
-            <h4> userClass</h4>
+                </div>
+
+            </div>
+            <label>Name and Class</label>
+
+            <h4>{{user.name}}</h4>
+            <h4> {{user.class}} Class</h4>
 
             <div class="form-group">
-                <label for="title">Email Adress</label>
-                <input type="email" class="form-control mb-3" id="email" placeholder="Email Adress" formControlName="email" required />
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control mb-3" id="email" placeholder="Email Address" formControlName="email" required />
             </div>
             <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
                 <div *ngIf="email.errors.required">
@@ -28,32 +52,36 @@
                     Insert valid email. example@example.exp
                 </div>
             </div>
-            <input type="password" class="form-control mb-3" id="password" placeholder="Password" formControlName="password" minlength="2" maxlength="15" required />
-            <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
-                <div *ngIf="password.errors.required">
+            <label for="password">Password</label>
+            <input type="password" class="form-control mb-3" id="password" placeholder="Type your new password" formControlName="password" appConfirmEqualValidator="password" />
+            <div class="alert alert-danger" *ngIf="password.invalid && password.touched ">
+                <!-- <div *ngIf="password.errors.required">
                     Please insert password!
-                </div>
+                </div> -->
                 <div *ngIf="password.errors.minlength || password.errors.maxlength">
                     Password must be between 2 and 15 symbols long!
                 </div>
 
             </div>
-
-            <input type="password" class="form-control mb-3" placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" appConfirmEqualValidator="password" required />
-            <div class="alert alert-danger" *ngIf="confirmPassword.invalid
-                                         && confirmPassword.touched ">
-                <div *ngIf="confirmPassword.errors.required">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control mb-3" placeholder="Confirm password" id="confirmPassword" formControlName="confirmPassword" appConfirmEqualValidator="password" />
+            <div class="alert alert-danger" *ngIf="(confirmPassword.invalid || (password.touched && password.dirty))">
+                <!-- <div *ngIf="confirmPassword.errors.required">
                     Please confirm your password!
+                </div> -->
+                <div *ngIf="!confirmPassword.errors">
+                    Passwords do not match!
                 </div>
-                <div *ngIf="confirmPassword.errors.notEqual && !confirmPassword.errors?.required">
+                <div *ngIf="confirmPassword.errors?.notEqual">
                     Passwords do not match!
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cancel click')">Cancel</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cancel click')">Cancel</button>
                 <button type="submit" class="btn btn-outline-primary" [disabled]="modalForm.invalid">Save
-        </button>
+                </button>
+
             </div>
         </div>
     </div>

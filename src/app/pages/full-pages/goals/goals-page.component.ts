@@ -49,6 +49,8 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private modalStatusSubscription: Subscription;
   private pathSubs: Subscription;
   private goalTasksCompletedSubs: Subscription;
+  private modalCommentSubscription: Subscription;
+  private modalSkipCommentSubsc: Subscription;
   private getTasksSubs: Subscription;
 
   constructor (
@@ -101,7 +103,9 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
     } )
     this.modalCreateSubscription = this.eventService.on( 'confirm create/edit', ( actionInfo => this.mapAction( actionInfo ) ) );
     this.modalDeleteSubscription = this.eventService.on( 'confirm delete', ( itemInfo => this.deleteItem( itemInfo ) ) );
-    this.modalStatusSubscription = this.eventService.on( 'change status', ( itemInfo => this.changeStatus( itemInfo ) ) )
+    this.modalStatusSubscription = this.eventService.on( 'change status', ( itemInfo => this.changeStatus( itemInfo ) ) );
+    this.modalCommentSubscription = this.eventService.on( 'addComment', ( itemInfo => this.changeStatus( itemInfo ) ) )
+    this.modalSkipCommentSubsc = this.eventService.on( 'skipComment', ( itemInfo => this.changeStatus( itemInfo ) ) )
   }
   ngAfterViewInit(): void {
     // const tree = this.router.parseUrl( this.router.url );
@@ -215,12 +219,18 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private changeStatus( itemInfo: any ) {
     const item = {
       id: itemInfo.itemId,
-      status: itemInfo.status === 0 ? 1 : 0
+      status: itemInfo.status == 0 ? 1 : 0,
     }
+
     if ( itemInfo.itemType === 'goal' ) {
       this.autoChangeGoalStatusDependingTasksStatus( item.id );
       //this.changeGoalStatus( itemInfo.itemId, item )
     } else if ( itemInfo.itemType === 'action' ) {
+
+      if ( itemInfo.formValue ) {
+        item[ 'feedback' ] = itemInfo.formValue[ 'feedback' ];
+        console.log( item );
+      }
       this.editTaskSubscription = this.taskService.putEditTaskById( itemInfo.itemId, item )
         .subscribe( data => {
           const action = data[ 'data' ];
@@ -310,6 +320,12 @@ export class GoalsPageComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if ( this.goalTasksCompletedSubs ) {
       this.goalTasksCompletedSubs.unsubscribe();
+    }
+    if ( this.modalCommentSubscription ) {
+      this.modalCommentSubscription.unsubscribe();
+    }
+    if ( this.modalSkipCommentSubsc ) {
+      this.modalCommentSubscription.unsubscribe();
     }
   }
 }

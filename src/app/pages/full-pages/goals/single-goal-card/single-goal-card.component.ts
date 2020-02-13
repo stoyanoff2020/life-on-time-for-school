@@ -33,8 +33,8 @@ export class SingleGoalCardComponent implements OnInit {
     this.isAllGoalTasksCompleted = this.goal.tasks.find( t => t.status == '0' ) === undefined;
   }
 
-  openModal( name: string, itemType: string, actionType: string, itemId?: any, date?: SeparatedDate ) {
-    this.modalService.open( name, itemType, actionType, itemId, date );
+  openModal( name: string, itemType: string, actionType: string, item?: any, date?: SeparatedDate ) {
+    this.modalService.open( name, itemType, actionType, item, date );
   }
 
   changeStatus( itemType: string, itemId: string, status: number ) {
