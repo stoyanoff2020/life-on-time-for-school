@@ -1,13 +1,13 @@
 <ng-template [ngIf]="goal">
     <div class="card">
-        <div class="card-header p-1">
+        <div class="card-header p-2">
             <!-- <div id="headingCollapse14" class="card-header pb-3"> -->
             <a class="card-title lead collapsed text-muted" [attr.aria-expanded]="!isGoalCollapsed" aria-controls="'g-'+ goal.id" (click)="isGoalCollapsed=!isGoalCollapsed">
                 {{goal.title}}
                 <span class="float-right">
                     <!-- fa fa-caret-down -->
-                    <i *ngIf="isGoalCollapsed" class="fa fa-caret-down font-medium"></i>
-                    <i *ngIf="!isGoalCollapsed" class="fa fa-caret-up font-medium"></i>
+                    <i *ngIf="isGoalCollapsed" class="fa fa-caret-down font-small"></i>
+                    <i *ngIf="!isGoalCollapsed" class="fa fa-caret-up font-small"></i>
                 </span>
             </a>
         </div>
