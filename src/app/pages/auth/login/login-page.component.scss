@@ -1,38 +1,3 @@
-// Login Page
-// #login {
-//     background-image: url("assets/img/photos/background.png");
-//     background-size: cover;
-//     background-repeat: no-repeat;
-//     .login-img {
-//         padding: 0;
-//         background: #f0f0f0;
-//     }
-//     button:disabled {
-//         cursor: not-allowed;
-//     }
-//     .login-btn {
-//         .btn.btn-outline-primary {
-//             &:hover {
-//                 a {
-//                     color: #fff;
-//                 }
-//             }
-//         }
-//     }
-//     .recover-pass {
-//         button.btn.btn-primary {
-//             color: #fff !important;
-//         }
-//     }
-//     .forgot-password-option,
-//     .remember-me {
-//         a.text-decoration-none,
-//         .custom-control-label {
-//             font-size: 14px;
-//         }
-//     }
-// }
-// For new login page
 #login {
     background-image: url("assets/img/photos/background.jpg");
     background-size: cover;
@@ -47,7 +12,7 @@
     //     }
     // }
     .login-logo {
-        width: 280px;
+        width: 145px;
     }
     .login-form {
         background-color: rgba(0, 0, 0, .4);

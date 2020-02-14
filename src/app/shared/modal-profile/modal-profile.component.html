@@ -64,19 +64,18 @@
 
             </div>
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control mb-3" placeholder="Confirm password" id="confirmPassword" formControlName="confirmPassword" appConfirmEqualValidator="password" />
-            <div class="alert alert-danger" *ngIf="(confirmPassword.invalid || (password.touched && password.dirty))">
+            <input type="password" class="form-control mb-3" placeholder="Confirm password" id="confirmPassword" formControlName="confirmPassword" appConfirmEqualValidator="password" [required]="password.value != ''" />
+            <div class="alert alert-danger" *ngIf="confirmPassword.invalid">
                 <!-- <div *ngIf="confirmPassword.errors.required">
                     Please confirm your password!
                 </div> -->
-                <div *ngIf="!confirmPassword.errors">
-                    Passwords do not match!
+                <div *ngIf="confirmPassword.errors?.required && confirmPassword.pristine">
+                    Please confirm password!
                 </div>
-                <div *ngIf="confirmPassword.errors?.notEqual">
+                <div *ngIf="confirmPassword.errors?.notEqual && (confirmPassword.dirty)">
                     Passwords do not match!
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cancel click')">Cancel</button>
                 <button type="submit" class="btn btn-outline-primary" [disabled]="modalForm.invalid">Save
