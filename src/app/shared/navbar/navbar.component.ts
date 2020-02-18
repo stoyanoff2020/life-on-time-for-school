@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   toggleHideSidebar = new EventEmitter<Object>();
   toggleClass = "ft-maximize";
   placement = "bottom-right";
+  userInfo: any;
   public isCollapsed = true;
   private logoutSubscription: Subscription;
   private userInfoSubsc: Subscription;
